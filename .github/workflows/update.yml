@@ -1,9 +1,9 @@
-name: Update HTML From SharePoint
+name: Update HTML From Dropbox
 
 on:
   schedule:
     - cron: "*/5 * * * *"    # kör var 5:e minut
-  workflow_dispatch:          # gör att du kan köra manuellt
+  workflow_dispatch:          # manuellt körbar
 
 jobs:
   update:
@@ -14,13 +14,14 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Download HTML
-  run: |
-    curl -L "https://www.dropbox.com/scl/fi/rmhgugdeondsxwh4i6xcq/Allergener.html?rlkey=3xszzhuplvikbcyjvhrjuepj0&st=o75tf5bn&dl=1"
-    
+        run: |
+          curl -L "https://www.dropbox.com/scl/fi/rmhgugdeondsxwh4i6xcq/Allergener.html?rlkey=3xszzhuplvikbcyjvhrjuepj0&st=o75tf5bn&dl=1" -o index.html
+
       - name: Commit and push if changed
         run: |
           git config user.name "auto-updater"
           git config user.email "no-reply@svedala.se"
           git add index.html
-          git commit -m "Auto update from SharePoint" || echo "No changes"
+          git commit -m "Auto update from Dropbox" || echo "No changes"
           git push
+``
