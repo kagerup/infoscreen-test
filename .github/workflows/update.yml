@@ -2,7 +2,7 @@ name: Update HTML From Dropbox
 
 on:
   schedule:
-    - cron: "*/1 * * * *"  # kör var 5:e minut
+    - cron: "*/1 * * * *"  # kör var 1:e minut
   workflow_dispatch:
 
 permissions:
