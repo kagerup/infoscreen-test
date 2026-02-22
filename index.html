@@ -1,83 +1,121 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<style>
-  /* --- Dokumentstorlek: A3 landscape --- */
-  @page {
-    size: 42cm 29.7cm;
-    margin: 0;
-  }
+  <meta charset="UTF-8">
 
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 1cm;
-    color: #000;
-  }
+  <style>
+    /* ============================================================
+       1) BASLAYOUT – CENTRERAT "A3‐PAPPER" I RUTA A
+       ============================================================ */
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #f3f4f6;              /* Ljus bakgrund utanför pappret */
+      font-family: Arial, sans-serif;
+      color: #000;
+      display: grid;
+      place-items: center;              /* Centrerar A3‐ytan i Piktomind-rutan */
+      padding: 2vh;                     /* Lite luft kring */
+    }
 
-  h1 {
-    font-size: 28px;
-    margin: 0 0 10px 0;
-  }
+    /* Här definierar vi A3‐ytan (PORTRÄTT eller LANDSKAP)  
+       Din PDF är A3 LANDSCAPE → vi använder landscape‐variant
+       A3 landscape förhållande = 420 / 297 ≈ 1.414
+    */
+    .a3 {
+      aspect-ratio: 420 / 297;          /* A3 landscape proportioner */
+      width: min(85vw, 75vh);           /* Skala lagom i Piktomind */
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.12);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
 
- :root {
-  --row-h: 20mm;        /* din radhöjd – behåll det värde du använder */
-  --ikon-size: 56px;    /* MINDRE ikon så den inte driver upp höjden */
-  --gap: 8px;
-}
+    header {
+      padding: 14px 18px;
+      text-align: center;               /* Centrerad rubrik */
+      font-weight: 700;
+      font-size: 28px;
+      border-bottom: 2px solid #eee;
+    }
 
-/* Första kolumnen: ikon + text i grid, men med text FÖRE ikon */
-.allergen-tabell td.namn {
-  padding: 0 0.5rem;
-  line-height: 1.2;
-  white-space: normal;
-  height: var(--row-h);
-}
+    main {
+      padding: 18px;
+      overflow: auto;                   /* Skroll i pappret om materialet är långt */
+    }
 
-.namn-wrap {
-  height: 100%;
-  display: grid;
-  /* textkolumnen tar plats (1fr), ikonen är auto-bredd */
-  grid-template-columns: 1fr auto;
-  align-items: center;      /* vertikal centrering */
-  column-gap: var(--gap);
-}
+    /* ============================================================
+       2) DITT BEFINTLIGA STILARK (oförändrat)
+       ============================================================ */
 
+    /* --- Dokumentstorlek: A3 landscape för utskrift --- */
+    @page {
+      size: 42cm 29.7cm;
+      margin: 0;
+    }
 
-/* Själva ikonen: liten och aldrig högre än raden */
-.namn-wrap .ikon {
-  width: var(--ikon-size);
-  height: var(--ikon-size);
-  max-height: calc(var(--row-h) - 15px); /* säkerhetsmarginal */
-  display: block;
-}
+    h1 {
+      font-size: 28px;
+      margin: 0 0 10px 0;
+    }
 
-/* Ikonen efter texten */
-.namn-wrap .label { order: 1; }
-.namn-wrap .ikon  { order: 2; }
+    :root {
+      --row-h: 20mm;        
+      --ikon-size: 56px;    
+      --gap: 8px;
+    }
 
+    /* Första kolumnen: ikon + text i grid, men med text FÖRE ikon */
+    .allergen-tabell td.namn {
+      padding: 0 0.5rem;
+      line-height: 1.2;
+      white-space: normal;
+      height: var(--row-h);
+    }
 
-/* Övriga kolumner (prick) – oförändrat, men påminnelse */
-.allergen-tabell td:not(.namn) {
-  padding: 0;
-  text-align: center;
-  vertical-align: middle;
-  line-height: var(--row-h);
-  height: var(--row-h);
-}
+    .namn-wrap {
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      column-gap: var(--gap);
+    }
 
-.dot { display: inline-block; font-size: 74px; line-height: 1; }
-  /* Header-rad */
-  .allergen-tabell thead th {
-    background-color: #f0f0f0;
-    font-weight: bold;
-  }
-</style>
+    .namn-wrap .ikon {
+      width: var(--ikon-size);
+      height: var(--ikon-size);
+      max-height: calc(var(--row-h) - 15px);
+      display: block;
+    }
+
+    .namn-wrap .label { order: 1; }
+    .namn-wrap .ikon  { order: 2; }
+
+    .allergen-tabell td:not(.namn) {
+      padding: 0;
+      text-align: center;
+      vertical-align: middle;
+      line-height: var(--row-h);
+      height: var(--row-h);
+    }
+
+    .dot {
+      display: inline-block;
+      font-size: 74px;
+      line-height: 1;
+    }
+
+    .allergen-tabell thead th {
+      background-color: #f0f0f0;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
 
- <h1>Allergenlista – 2026-02-17</h1>
+ <h1>Innehåll – 2026-02-17</h1>
 <table class="allergen-tabell">
   <colgroup>
     <col style="width:23%">
