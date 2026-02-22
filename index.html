@@ -102,6 +102,22 @@
     height: var(--row-h);
     line-height: var(--row-h);
   }
+
+/* Tunn, diskret grid runt alla celler */
+.allergen-tabell {
+  border-collapse: collapse; /* du har redan detta */
+  border: 0;                 /* ingen yttre ram om du inte vill */
+}
+
+.allergen-tabell th,
+.allergen-tabell td {
+  border: 0.5pt solid #d6d6d6; /* hårfin linje */
+}
+
+/* Valfritt: starkare ram runt headern */
+.allergen-tabell thead th {
+  border-bottom: 1pt solid #bdbdbd;
+}
 </style>
 </head>
 
@@ -109,8 +125,8 @@
 
 
  <h1>INNEHÅLL – 2026-02-17</h1>
-<table class="allergen-tabell">
-  <colgroup>
+  <<table class="allergen-tabell">
+  <<colgroup>
     <col style="width:23%">
     <col style="width:11%">
     <col style="width:11%">
