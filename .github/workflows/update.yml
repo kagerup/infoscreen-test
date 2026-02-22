@@ -24,4 +24,3 @@ jobs:
           git add index.html
           git commit -m "Auto update from Dropbox" || echo "No changes"
           git push
-``
