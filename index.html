@@ -3,223 +3,112 @@
 <!doctype html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8" />
-  <title>Innehåll</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<style>
+  /* --- Dokumentstorlek: A3 landscape --- */
+  @page {
+    size: 42cm 29.7cm;
+    margin: 0;
+  }
 
-  <style>
-    /* ============================================================
-       1) RAM FÖR A3-PAPPER – CENTRERAD YTA I RUTA A (LANDSKAP)
-       ============================================================ */
-    html, body {
-      height: 100%;
-      margin: 0;
-      background: #f3f4f6;              /* ljus bakgrund utanför papperet */
-      font-family: Arial, sans-serif;
-      color: #000;
-      display: grid;
-      place-items: center;              /* centrerar A3-ytan */
-      padding: 2vh;
-    }
-    .a3 {
-      aspect-ratio: 420 / 297;          /* A3 landscape ≈ 1.414 */
-      width: min(85vw, 75vh);           /* skala lagom i ruta A */
-      background: #fff;
-      border-radius: 6px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.12);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-    header {
-      padding: 14px 18px;
-      text-align: center;
-      font-weight: 700;
-      font-size: 28px;
-      border-bottom: 2px solid #eee;
-    }
-    main {
-      padding: 18px;
-      overflow: auto;                   /* scroll om innehållet blir långt */
-    }
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 1cm;
+    color: #000;
+  }
 
-    /* ============================================================
-       2) TABELL – LÅSTA KOLUMNBREDDER + RUTNÄT + RADBRYT
-       ============================================================ */
+  h1 {
+    font-size: 28px;
+    margin: 0 0 10px 0;
+  }
 
-    /* Följ <colgroup> strikt och rita rutnätet */
-    .allergen-tabell {
-      width: 100%;
-      table-layout: fixed !important;   /* följ <col> exakt */
-      border-collapse: collapse;        /* rutnät med gemensamma kanter */
-    }
+  :root {
+    --row-h: 20mm;        /* din radhöjd – behåll det värde du använder */
+    --ikon-size: 56px;    /* MINDRE ikon så den inte driver upp höjden */
+    --gap: 8px;
+  }
 
-    /* Lås kolumnprocenterna (23% + 7×11%).  !important för att slå igenom allt. */
-    .allergen-tabell col                 { width: 11% !important; }
-    .allergen-tabell col:first-child     { width: 23% !important; }
+  /* === NYTT === Centrera hela tabellen på sidan och lås kolumnlayouten */
+  .allergen-tabell {
+    margin: 0 auto;           /* centrerar tabellen horisontellt */
+    width: 100%;              /* låter colgroup procenträknas mot full bredd */
+    max-width: 100%;          /* ingen overflow i A3-ytan */
+    border-collapse: collapse;
+    table-layout: fixed;      /* tvingar fasta kolumnbredder enligt colgroup */
+    text-align: center;       /* grundcentrering av innehåll */
+  }
 
-    /* Rutnät & stabil bredd i cellerna */
-    .allergen-tabell th,
-    .allergen-tabell td {
-      border: 1px solid #d9d9d9;
-      padding: 0;                       /* lägg ev. luft senare – box-sizing skyddar bredden */
-      box-sizing: border-box;
-      min-width: 0;                     /* låt innehåll krympa inom col-bredd */
-      white-space: normal;              /* tillåt radbrytning */
-      vertical-align: middle;
-      line-height: var(--row-h);
-      height: var(--row-h);
-    }
+  /* Första kolumnen: ikon + text i grid, men med text FÖRE ikon */
+  .allergen-tabell td.namn {
+    padding: 0 0.5rem;
+    line-height: 1.2;
+    white-space: normal;
+    height: var(--row-h);
+    text-align: left; /* behåll vänsterställd text i första kolumnen om du vill */
+  }
 
-    /* Ikoner får inte pressa kolumnen */
-    .allergen-tabell img,
-    .namn-wrap .ikon {
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
+  .namn-wrap {
+    height: 100%;
+    display: grid;
+    /* textkolumnen tar plats (1fr), ikonen är auto-bredd */
+    grid-template-columns: 1fr auto;
+    align-items: center;      /* vertikal centrering */
+    column-gap: var(--gap);
+  }
 
-    /* Första kolumnen: text + ikon (text före ikon) */
-    .allergen-tabell td.namn {
-      padding: 0 0.5rem;                /* valfri liten luft */
-      line-height: 1.2;
-      white-space: normal;
-      height: var(--row-h);
-    }
-    .namn-wrap {
-      height: 100%;
-      display: grid;
-      grid-template-columns: 1fr auto;  /* text tar plats, ikon auto-bredd */
-      align-items: center;
-      column-gap: var(--gap);
-      min-width: 0;                     /* viktigt ihop med fixed layout */
-    }
-    .namn-wrap .label { order: 1; min-width: 0; overflow-wrap: anywhere; }
-    .namn-wrap .ikon  { order: 2; width: var(--ikon-size); height: var(--ikon-size);
-                        max-height: calc(var(--row-h) - 15px); }
+  /* Själva ikonen: liten och aldrig högre än raden */
+  .namn-wrap .ikon {
+    width: var(--ikon-size);
+    height: var(--ikon-size);
+    max-height: calc(var(--row-h) - 15px); /* säkerhetsmarginal */
+    display: block;
+  }
 
-    /* Stora prickar i matrisen */
-    .dot { display: inline-block; font-size: 74px; line-height: 1; }
+  /* Ikonen efter texten */
+  .namn-wrap .label { order: 1; }
+  .namn-wrap .ikon  { order: 2; }
 
-    /* Header-radens bakgrund */
-    .allergen-tabell thead th {
-      background-color: #f0f0f0;
-      font-weight: bold;
-    }
+  /* Övriga kolumner (prick) – centrerade och vertikalt mittade */
+  .allergen-tabell td:not(.namn) {
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+    height: var(--row-h);
+    line-height: var(--row-h);  /* radens höjd = underlättar vertikal centrering */
+  }
 
-    /* Maträttstext: radbryt inom rutan (max 2 rader + ellipsis)
-       – THEAD: alla kolumner utom första (allergen) */
-    .allergen-tabell thead th:not(:first-child) {
-      white-space: normal;
-      overflow-wrap: anywhere;
-      hyphens: auto;
+  /* === NYTT === Bullet-/punktcentrering som inte påverkar radhöjd */
+  .dot {
+    display: inline-block;
+    font-size: 74px;
+    line-height: 1;           /* undvik extra vertikal spacing */
+    vertical-align: middle;   /* mittas mot cellens linjehöjd */
+  }
 
-      display: -webkit-box;
-      -webkit-line-clamp: 2;            /* ändra till 3 om du vill visa tre rader */
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
+  /* Om du använder UL/LI i celler och vill centrera punkter + text */
+  .centered-bullets {
+    list-style-position: inside;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
 
-      line-height: 1.2;
-      padding: 0 6px;                   /* lite luft – påverkar ej bredd p.g.a. box-sizing */
-    }
-
-    /* TBODY: om maträttstext finns i en data-kolumn (t.ex. kolumn 2),
-       låt den radbrytas likadant. Ändra nth-child(X) om din maträtt ligger i annan kolumn,
-       eller lägg klassen .ratt på de cellerna. */
-    .allergen-tabell tbody td:nth-child(2),
-    .allergen-tabell tbody td.ratt {
-      white-space: normal;
-      overflow-wrap: anywhere;
-      hyphens: auto;
-
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-
-      line-height: 1.2;
-      padding: 0 6px;
-    }
-
-    /* ============================================================
-       3) VARIABLER + UTSKRIFT (A3)
-       ============================================================ */
-    :root {
-      --row-h: 20mm;        /* radhöjd */
-      --ikon-size: 56px;    /* ikonstorlek */
-      --gap: 8px;           /* mellanrum i grid i första kolumnen */
-    }
-    @page {
-      size: 42cm 29.7cm;    /* A3 landscape för utskrift */
-      margin: 0;
-    }
-    h1 {                     /* om gamla h1:or finns kvar någonstans */
-      font-size: 28px;
-      margin: 0 0 10px 0;
-    }
-  </style>
+  /* Header-rad */
+  .allergen-tabell thead th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+    text-align: center;       /* rubriker centreras */
+    height: var(--row-h);
+    line-height: var(--row-h);
+  }
+</style>
 </head>
 
 <body>
-  <section class="a3">
-    <header>Innehåll</header>
-
-    <main>
-      <!-- ========================================================
-           TABELL – EXEMPEL: behåll din egen struktur/texter/ikoner
-           VIKTIGT: Antalet <col> måste matcha antalet celler per <tr>.
-           ======================================================== -->
-      <table class="allergen-tabell">
-        <colgroup>
-          <col style="width:23%">
-          <col style="width:11%">
-          <col style="width:11%">
-          <col style="width:11%">
-          <col style="width:11%">
-          <col style="width:11%">
-          <col style="width:11%">
-          <col style="width:11%">
-        </colgroup>
-
-        <thead>
-          <tr>
-            <th></th>
-            <th>Kalops med morötter och inlagd rödbeta</th>
-            <th>Pannkaka med sylt</th>
-            <th>Maträtt 3</th>
-            <th>Maträtt 4</th>
-            <th>Maträtt 5</th>
-            <th>Maträtt 6</th>
-            <th>Maträtt 7</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td class="namn">
-              <div class="namn-wrap">
-                <span class="label">Mjölkprotein</span>
-                <img class="ikon" alt="" src=""/>
-              </div>
-            </td>
-            <td class="ratt"><span class="dot">●</span></td>
-            <td><span class="dot">●</span></td>
-            <td></td><td></td><td></td><td></td><td></td>
-          </tr>
-
-          <!-- …fler rader… -->
-        </tbody>
-      </table>
-    </main>
-  </section>
-</body>
 
 
-<body>
-
- <h1>Innehåll – 2026-02-17</h1>
+ <h1>INNEHÅLL – 2026-02-17</h1>
 <table class="allergen-tabell">
   <colgroup>
     <col style="width:23%">
