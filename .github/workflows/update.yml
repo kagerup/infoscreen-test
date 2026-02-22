@@ -13,10 +13,9 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
 
-      - name: Download HTML from SharePoint
-        run: |
-          curl -L "https://svedalaonline.sharepoint.com/sites/team-svedala-tn-utbildning-Barafrmig/Delade%20dokument/AllergenerAuto/Temp/Allergener.html" -o index.html
-
+      - name: Download HTML
+  run: |
+    curl -L "https://www.dropbox.com/scl/fi/rmhgugdeondsxwh4i6xcq/Allergener.html?rlkey=3xszzhuplvikbcyjvhrjuepj0&st=o75tf5bn&dl=1"
       - name: Commit and push if changed
         run: |
           git config user.name "auto-updater"
