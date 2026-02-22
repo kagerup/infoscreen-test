@@ -2,8 +2,11 @@ name: Update HTML From Dropbox
 
 on:
   schedule:
-    - cron: "*/5 * * * *"    # kör var 5:e minut
-  workflow_dispatch:          # manuellt körbar
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   update:
@@ -15,7 +18,7 @@ jobs:
 
       - name: Download HTML
         run: |
-          curl -L "https://www.dropbox.com/scl/fi/rmhgugdeondsxwh4i6xcq/Allergener.html?rlkey=3xszzhuplvikbcyjvhrjuepj0&st=o75tf5bn&dl=1" -o index.html
+          curl -L "https://dl.dropboxusercontent.com/scl/fi/rmhgugdeondsxwh4i6xcq/Allergener.html?rlkey=3xszzhuplvikbcyjvhrjuepj0&st=o75tf5bn" -o index.html
 
       - name: Commit and push if changed
         run: |
