@@ -12,6 +12,7 @@
         font-family: Arial, sans-serif;
     }
 
+    /* Hela arbetsytan */
     #canvas {
         width: 1181px;
         height: 1080px;
@@ -22,47 +23,42 @@
         background: #ffffff;
     }
 
-    /* LEFT AREA */
+    /* Stora vänstra rutan (tar två rader) */
     .left-big {
         grid-row: 1 / 3;
-        background-color: #98c1d9;
-        padding: 0;
+        background-color: #98c1d9; /* ljus blå */
+        padding: 0;                /* viktigt! */
+        box-sizing: border-box;
         overflow: hidden;
         position: relative;
     }
 
-    /* Wrapper */
+    /* Wrapper runt iframe */
     .iframe-wrapper {
+        width: 1%;
+        height: 1%;
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* Själva iframen */
+    .iframe-wrapper iframe {
         width: 100%;
         height: 100%;
-        position: relative;
-        overflow: hidden;
-    }
-
-    /* Iframe med scaling / stretching */
-    .iframe-wrapper iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
         border: none;
-
-        /* Originalstorlek på sidan du bäddar in */
-        width: 1920px;
-        height: 1080px;
-
-        /* Anpassa skalningen */
-        transform-origin: top left;
-        transform: scale(0.615); /* <-- justera vid behov */
+        display: block;
     }
 
+    /* Övre högra rutan */
     .right-top {
-        background-color: #e5989b;
+        background-color: #e5989b; /* varm rosa */
         padding: 20px;
         box-sizing: border-box;
     }
 
+    /* Nedre högra rutan */
     .right-bottom {
-        background-color: #b5e48c;
+        background-color: #b5e48c; /* ljus grön */
         padding: 20px;
         box-sizing: border-box;
     }
@@ -72,22 +68,25 @@
 <body>
 
 <div id="canvas">
-
+    
+    <!-- LEFT AREA WITH IFRAME WRAPPER -->
     <div class="left-big">
         <div class="iframe-wrapper">
-            <iframe src="https://kagerup.github.io/infoscreen-test/index"></iframe>
+            <iframe
+            src="https://kagerup.github.io/infoscreen-test/index"></iframe>
         </div>
     </div>
 
     <div class="right-top">
         <h3>Gårdagens svinn</h3>
-        <p>{{svinn är saker som kastas om man är trött jag tröttnar}}</p>
+        <p>{{svinn är saker som kastas om man är trött}}</p>
     </div>
 
     <div class="right-bottom">
         <h3>Information</h3>
         <p><!-- placeholder för framtida behov --></p>
     </div>
+
 </div>
 
 </body>
