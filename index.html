@@ -65,20 +65,31 @@ html, body {
 .allergen-tabell {
     margin-top: 0;
     margin: 0;               /* ← VAR FÖRUT "0 auto" (centrerade sidan) */
-    width: 100%;             /* ← VAR FÖRUT 80% */
-    max-width: 100%;         /* ← VAR FÖRUT 80% */
+    width: 100% !important;            /* ← VAR FÖRUT 80% */
+    max-width: 100% !important;        /* ← VAR FÖRUT 80% */
     border-collapse: collapse;
-    table-layout: fixed;
+    table-layout: fixed !important;
     text-align: center;
 }
 
 /* Första kolumnen */
 .allergen-tabell td.namn {
-    padding: 0 0.5rem;
+    padding: 0 rem;
     line-height: 1.2;
     white-space: normal;
     height: var(--row-h);
     text-align: left;
+}
+
+.allergen-tabell th,
+.allergen-tabell td {
+    width: auto !important;
+    border: 0.5pt solid #d6d6d6;
+}
+
+/* colgroups tvingas också vara flexibla */
+col {
+    width: auto !important;
 }
 
 .namn-wrap {
