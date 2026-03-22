@@ -1,135 +1,154 @@
 <!DOCTYPE html>
-<html>
-<!doctype html>
 <html lang="sv">
 <head>
 <meta charset="UTF-8">
 
 <style>
-  /* --- Exakt dokumentstorlek i pixlar + noll marginaler --- */
-  @page {
-    size: 1080px 1100px;
-    margin: 10;
-  }
 
-body {
-  height: 60%;      /* 100% av 1100px */
-}
-
-.wrapper {
-  height: 60%;      /* om du vill innesluta tabellen i en container */
-  max-height: 60%;  /* extra säkerhet */
-  overflow: hidden;  /* inget kan sticka över */
-}
-  html, body {
+/* ===========================================
+   1. Lås dokumentet till exakt 1080 px högt
+   =========================================== */
+html, body {
+    height: 1080px;       /* ← låst höjd */
+    max-height: 1080px;   /* ← ingen höjd över 1080 */
     margin: 0;
     padding: 0;
+    overflow: hidden;     /* ← ingen scroll */
     color: #000;
-    }  
+}
 
-  h1 {
-    font-size: 28px;
-    margin: 0 0 10px 0;
-  }
+/* (pdf-writing stuff — behålls men påverkar inte iframe) */
+@page {
+    size: 1080px 1100px;
+    margin: 10;
+}
 
-  :root {
-    --row-h: 18mm;        /* din radhöjd – behåll det värde du använder */
-    --ikon-size: 54px;    /* MINDRE ikon så den inte driver upp höjden */
+/* ===========================================
+   2. Wrapper som trycker ihop innehållet
+   =========================================== */
+
+.scale-wrapper {
+    width: 100%;
+    height: 1080px;       /* ← exakt höjd */
+    overflow: hidden;     /* ← inget får sticka ut */
+    position: relative;
+}
+
+/* Skala hela innehållet (tabellen) */
+.scale-wrapper > * {
+    transform-origin: top left;
+    transform: scale(var(--scale));   /* ← auto-scaling */
+    display: block;
+}
+
+/* Standard-skala — du kan finjustera */
+:root {
+    --scale: 0.80;   /* ← ÄNDRA detta så allt får plats perfekt */
+}
+
+/* ===========================================
+   3. Din tabell-layout, nu vänsterställd
+   =========================================== */
+
+:root {
+    --row-h: 18mm;
+    --ikon-size: 54px;
     --gap: 8px;
-  }
+}
 
-  /* === NYTT === Centrera hela tabellen på sidan och lås kolumnlayouten */
-  .allergen-tabell {
-    margin-top: 60px;
-    margin: 0;           /* centrerar tabellen horisontellt */
-    width: 100%;              /* låter colgroup procenträknas mot full bredd */
-    max-width: 100%;          /* ingen overflow i A3-ytan */
+/* JUSTERINGAR:
+   - inget "margin: 0 auto"
+   - full bredd
+   - ingen centrering
+*/
+
+.allergen-tabell {
+    margin-top: 0;
+    margin: 0;               /* ← VAR FÖRUT "0 auto" (centrerade sidan) */
+    width: 100%;             /* ← VAR FÖRUT 80% */
+    max-width: 100%;         /* ← VAR FÖRUT 80% */
     border-collapse: collapse;
-    table-layout: fixed;      /* tvingar fasta kolumnbredder enligt colgroup */
-    text-align: center;       /* grundcentrering av innehåll */
-  }
+    table-layout: fixed;
+    text-align: center;
+}
 
-  /* Första kolumnen: ikon + text i grid, men med text FÖRE ikon */
-  .allergen-tabell td.namn {
+/* Första kolumnen */
+.allergen-tabell td.namn {
     padding: 0 0.5rem;
     line-height: 1.2;
     white-space: normal;
     height: var(--row-h);
-    text-align: left; /* behåll vänsterställd text i första kolumnen om du vill */
-  }
+    text-align: left;
+}
 
-  .namn-wrap {
+.namn-wrap {
     height: 100%;
     display: grid;
-    /* textkolumnen tar plats (1fr), ikonen är auto-bredd */
     grid-template-columns: 1fr auto;
-    align-items: center;      /* vertikal centrering */
+    align-items: center;
     column-gap: var(--gap);
-  }
+}
 
-  /* Själva ikonen: liten och aldrig högre än raden */
-  .namn-wrap .ikon {
+.namn-wrap .ikon {
     width: var(--ikon-size);
     height: var(--ikon-size);
-    max-height: calc(var(--row-h) - 15px); /* säkerhetsmarginal */
+    max-height: calc(var(--row-h) - 15px);
     display: block;
-  }
+}
 
-  /* Ikonen efter texten */
-  .namn-wrap .label { order: 1; }
-  .namn-wrap .ikon  { order: 2; }
+.namn-wrap .label { order: 1; }
+.namn-wrap .ikon  { order: 2; }
 
-  /* Övriga kolumner (prick) – centrerade och vertikalt mittade */
-  .allergen-tabell td:not(.namn) {
+/* Resterande celler */
+.allergen-tabell td:not(.namn) {
     padding: 0;
     text-align: center;
     vertical-align: middle;
     height: var(--row-h);
-    line-height: var(--row-h);  /* radens höjd = underlättar vertikal centrering */
-  }
+    line-height: var(--row-h);
+}
 
-  /* === NYTT === Bullet-/punktcentrering som inte påverkar radhöjd */
-  .dot {
+/* Punkt-ikon */
+.dot {
     display: inline-block;
     font-size: 74px;
-    line-height: 1;           /* undvik extra vertikal spacing */
-    vertical-align: middle;   /* mittas mot cellens linjehöjd */
-  }
+    line-height: 1;
+    vertical-align: middle;
+}
 
-  /* Om du använder UL/LI i celler och vill centrera punkter + text */
-  .centered-bullets {
+.centered-bullets {
     list-style-position: inside;
     padding: 0;
     margin: 0;
     text-align: center;
-  }
+}
 
-  /* Header-rad */
-  .allergen-tabell thead th {
+/* Header */
+.allergen-tabell thead th {
     background-color: #f0f0f0;
     font-weight: bold;
-    text-align: center;       /* rubriker centreras */
+    text-align: center;
     height: var(--row-h);
     line-height: var(--row-h);
-  }
+}
 
-/* Tunn, diskret grid runt alla celler */
+/* Gridlinjer */
 .allergen-tabell {
-  border-collapse: collapse; /* du har redan detta */
-  border: 0;                 /* ingen yttre ram om du inte vill */
+    border-collapse: collapse;
+    border: 0;
 }
 
 .allergen-tabell th,
 .allergen-tabell td {
-  border: 0.5pt solid #d6d6d6; /* hårfin linje */
+    border: 0.5pt solid #d6d6d6;
 }
 
-/* Valfritt: starkare ram runt headern */
 .allergen-tabell thead th {
-  border-bottom: 1pt solid #bdbdbd;
+    border-bottom: 1pt solid #bdbdbd;
 }
+
 </style>
-</head>
+
 
 <body>
 <table class="allergen-tabell">
