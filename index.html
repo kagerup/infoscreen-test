@@ -50,7 +50,22 @@ body {
     table-layout: fixed;      /* tvingar fasta kolumnbredder enligt colgroup */
     text-align: center;       /* grundcentrering av innehåll */
   }
+  .scale-wrapper {
+    height: 1080px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
 
+  .scale-wrapper > * {
+    transform-origin: top left;
+    transform: scale(var(--scale));
+    display: block;
+  }
+
+  :root {
+    --scale: 0.78; /* ungefär – kan finjusteras */
+  }
   /* Första kolumnen: ikon + text i grid, men med text FÖRE ikon */
   .allergen-tabell td.namn {
     padding: 0 rem;
@@ -134,6 +149,7 @@ body {
 </head>
 
 <body>
+<div class="scale-wrapper">
 <table class="allergen-tabell">
 
     <colgroup>
@@ -417,6 +433,6 @@ src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMoAAAB0CAYAAADEpa2tAAAHPUlEQ
 
 </tbody>
 </table>
-
+</div>
 </body>
 </html>
