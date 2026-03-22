@@ -8,17 +8,17 @@
 <style>
   /* --- Exakt dokumentstorlek i pixlar + noll marginaler --- */
   @page {
-    size: 1080px 1100px;
-    margin: 10;
+    size: 11181px 1080px;
+    margin: 5;
   }
 
 body {
-  height: 60%;      /* 100% av 1100px */
+  height: 100%;      /* 100% av 1100px */
 }
 
 .wrapper {
-  height: 60%;      /* om du vill innesluta tabellen i en container */
-  max-height: 60%;  /* extra säkerhet */
+  height: 100%;      /* om du vill innesluta tabellen i en container */
+  max-height: 100%;  /* extra säkerhet */
   overflow: hidden;  /* inget kan sticka över */
 }
   html, body {
@@ -42,8 +42,8 @@ body {
   .allergen-tabell {
     margin-top: 60px;
     margin: 0 auto;           /* centrerar tabellen horisontellt */
-    width: 80%;              /* låter colgroup procenträknas mot full bredd */
-    max-width: 80%;          /* ingen overflow i A3-ytan */
+    width: 100%;              /* låter colgroup procenträknas mot full bredd */
+    max-width: 100%;          /* ingen overflow i A3-ytan */
     border-collapse: collapse;
     table-layout: fixed;      /* tvingar fasta kolumnbredder enligt colgroup */
     text-align: center;       /* grundcentrering av innehåll */
@@ -51,7 +51,7 @@ body {
 
   /* Första kolumnen: ikon + text i grid, men med text FÖRE ikon */
   .allergen-tabell td.namn {
-    padding: 0 0.5rem;
+    padding: 0 rem;
     line-height: 1.2;
     white-space: normal;
     height: var(--row-h);
