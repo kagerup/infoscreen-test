@@ -25,29 +25,31 @@
 
     /* Stora vänstra rutan (tar två rader) */
     .left-big {
-        grid-row: 1 / 3;
-        background-color: #98c1d9; /* ljus blå */
-        padding: 0;                /* viktigt! */
-        box-sizing: border-box;
-        overflow: hidden;
-        position: relative;
-    }
+    grid-row: 1 / 3;
+    background-color: #98c1d9;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    text-align: left;       /* tvinga allt till vänster */
+}
 
-    /* Wrapper runt iframe */
-    .iframe-wrapper {
-        width: 100%;
-        height: 10%;
-        overflow: hidden;
-        position: relative;
-    }
+.iframe-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    text-align: left;       /* viktigt */
+}
 
-    /* Själva iframen */
-    .iframe-wrapper iframe {
-        width: 120%;
-        height: 100%;
-        border: none;
-        display: block;
-    }
+.iframe-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    margin: 0;              /* ta bort auto-centrering */
+    padding: 0;             /* ta bort auto-centrering */
+}}
 
     /* Övre högra rutan */
     .right-top {
