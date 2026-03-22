@@ -1,1 +1,86 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<style>
+    body {
+        margin: 0;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        background-color: #e5989b;
+        color: #000;
+        box-sizing: border-box;
+    }
 
+    h1 {
+        margin: 0 0 10px 0;
+        font-size: 40px;
+        font-weight: bold;
+    }
+
+    h2 {
+        margin: 0 0 20px 0;
+        font-size: 26px;
+        font-weight: normal;
+    }
+
+    .row {
+        display: flex;
+        align-items: center;
+        font-size: 22px;
+        margin-bottom: 12px;
+    }
+
+    .icon {
+        font-size: 26px;
+        margin-right: 10px;
+    }
+
+    .divider {
+        width: 100%;
+        height: 2px;
+        background-color: #000;
+        margin: 25px 0;
+        opacity: 0.5;
+    }
+</style>
+</head>
+<body>
+
+<h1>SVINN</h1>
+<h2>Gårdagens svinn –@{outputs('Get_a_row')?['body/Datum']} </h2>
+
+<div class="row">
+    <div class="icon">⚠️</div>
+    Passade inte mig: <strong>@{outputs('Get_a_row')?['body/Passade inte mig']}</strong>
+</div>
+
+<div class="row">
+    <div class="icon">🍽️</div>
+    Tog för mycket: <strong>@{outputs('Add_a_row_into_a_table')?['body/Tog för mycket']};</strong>
+</div>
+
+<div class="row">
+    <div class="icon">⏱️</div>
+    Hann inte: <strong>@{outputs('Get_a_row')?['body/Hann inte']};</strong>
+</div>
+
+<div class="divider"></div>
+
+<div class="row">
+    <div class="icon">🥗</div>
+    Serveringssvinn: <strong>@{outputs('Get_a_row')?['body/Serverings svinn']}</strong>
+</div>
+
+<div class="row">
+    <div class="icon">👨‍🍳</div>
+    Kökssvinn: <strong>@{outputs('Get_a_row')?['body/Köks svinn']}</strong>
+</div>
+
+<div class="row">
+    <div class="icon">🥛</div>
+    Antal glas på vagnen: <strong>@{outputs('Get_a_row')?['body/Antal glas']}</strong>
+</div>
+
+</body>
+</html>
