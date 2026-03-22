@@ -8,7 +8,7 @@
 <style>
   /* --- Exakt dokumentstorlek i pixlar + noll marginaler --- */
   @page {
-    size: 11181px 1080px;
+    size: 1181px 1080px;
     margin: 5;
   }
 
@@ -17,11 +17,13 @@ body {
 }
 
 .wrapper {
-  height: 100%;      /* om du vill innesluta tabellen i en container */
-  max-height: 100%;  /* extra säkerhet */
-  overflow: hidden;  /* inget kan sticka över */
+  height: auto;
+  max-height: none;  /* extra säkerhet */
+  overflow: visible;  /* inget kan sticka över */
 }
   html, body {
+    height: auto;
+    overflow: visible;
     margin: 0;
     padding: 0;
     color: #000;
