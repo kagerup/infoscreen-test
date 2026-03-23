@@ -14,71 +14,72 @@
 
     h1 {
         margin: 0 0 10px 0;
-        font-size: 40px;
+        font-size: 36px;
         font-weight: bold;
     }
 
-    h2 {
-        margin: 0 0 20px 0;
-        font-size: 26px;
-        font-weight: normal;
-    }
-
     .row {
-        display: flex;
+        display: grid;
+        grid-template-columns: 35px 1fr auto;
         align-items: center;
         font-size: 22px;
-        margin-bottom: 12px;
-    }
-
-    .icon {
-        font-size: 26px;
-        margin-right: 10px;
+        margin-bottom: 14px;
+        gap: 10px;
     }
 
     .divider {
         width: 100%;
         height: 2px;
         background-color: #000;
-        margin: 25px 0;
-        opacity: 0.5;
+        margin: 20px 0;
+        opacity: 0.4;
+    }
+
+    .value {
+        font-weight: bold;
     }
 </style>
 </head>
 <body>
 
-<h1>SVINN-2026-03-22</h1>
+<h1>SVINN – 2026-03-22</h1>
 
 <div class="row">
-    <div class="icon">⚠️</div>
-    Passade inte mig: <strong>&nbsp;3</strong>
+    <div>⚠️</div>
+    <div>Passade inte mig:</div>
+    <div class="value">3 kg</div>
 </div>
 
 <div class="row">
-    <div class="icon">🍽️</div>
-    Tog för mycket: <strong>&nbsp;3</strong>
+    <div>🍽️</div>
+    <div>Tog för mycket:</div>
+    <div class="value">3 kg</div>
 </div>
 
 <div class="row">
-    <div class="icon">⏱️</div>
-    Hann inte: <strong>&nbsp;3</strong>
+    <div>⏱️</div>
+    <div>Hann inte:</div>
+    <div class="value">3 kg</div>
 </div>
 
 <div class="divider"></div>
 
 <div class="row">
-    <div class="icon">🥗</div>
-    Serveringssvinn: <strong>&nbsp;3</strong>
+    <div>🥗</div>
+    <div>Serveringssvinn:</div>
+    <div class="value">3 kg</div>
 </div>
 
 <div class="row">
-    <div class="icon">👨‍🍳</div>
-    Kökssvinn: <strong>&nbsp;3</strong>
+    <div>👨‍🍳</div>
+    <div>Kökssvinn:</div>
+    <div class="value">3 kg</div>
 </div>
 
 <div class="row">
-    <div class="icon">🥛</div>
-    Antal glas på vagnen: <strong>&nbsp;3</strong>
+    <div>🥛</div>
+    <div>Antal glas på vagnen:</div>
+    <div class="value">3</div>
 </div>
 
 </body>
