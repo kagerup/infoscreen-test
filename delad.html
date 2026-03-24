@@ -39,20 +39,19 @@
     height: 100%;
     overflow: hidden;
     position: relative;
-    text-align: left;       /* viktigt */
+    text-align: left;
 }
 
 .iframe-wrapper iframe {
-    width: 142%;
-    height: 142%;
-    transform: scale (0.7);     /* ändra skalan här */
-    transform-origin: 0;      /* skala från övre vänstra hörnet */
+    width: 142%;               /* extra bredd */
+    height: 142%;              /* extra höjd */
+    transform: scale(0.70);    /* rätt syntax */
+    transform-origin: top left;/* rätt hörn */
     border: none;
     display: block;
-    margin: 0;              /* ta bort auto-centrering */
-    padding: 0;             /* ta bort auto-centrering */
+    margin: 0;
+    padding: 0;
 }
-
     /* Övre högra rutan */
     .right {
         background-color: #e5989b; /* varm rosa */
