@@ -18,7 +18,7 @@
         height: 530px;
         margin: 0 auto;
         display: grid;
-        grid-template-columns: 45% 55%;
+        grid-template-columns: 50% 50%;
         background: #ffffff;
     }
 
@@ -33,24 +33,38 @@
     text-align: left;       /* tvinga allt till vänster */
 }
 
-    .iframe-wrapper {
+.iframe-wrapper-allergi {
     width: 100%;
     height: 100%;
     overflow: hidden;
     position: relative;
-    text-align: left;
 }
 
-.iframe-wrapper iframe {
-    width: 142%;               /* extra bredd */
-    height: 142%;              /* extra höjd */
-    transform: scale(0.70);    /* rätt syntax */
-    transform-origin: top left;/* rätt hörn */
+.iframe-wrapper-allergi iframe {
+    width: 1181px;           /* originalbredd – vi MÄTER den åt dig om du vill */
+    height: 1080px;          /* originalhöjd – mät eller låt mig göra det */
+    transform: scale(0.70);  /* anpassa efter behov */
+    transform-origin: top left;
     border: none;
     display: block;
-    margin: 0;
-    padding: 0;
 }
+
+    .iframe-wrapper-info {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.iframe-wrapper-meny iframe {
+    width: 736px;            /* exempel – beror på sidan */
+    height: 530px;          /* exempel */
+    transform: scale(1.10);  /* exempel */
+    transform-origin: top left;
+    border: none;
+    display: block;
+}
+``
     /* Övre högra rutan */
     .right {
         background-color: #e5989b; /* varm rosa */
@@ -68,14 +82,14 @@
     
     <!-- LEFT AREA WITH IFRAME WRAPPER -->
     <div class="left">
-        <div class="iframe-wrapper">
+        <div class="iframe-wrapper-allergi">
             <iframe
             src="https://kagerup.github.io/infoscreen-test/Allergi_del.html"></iframe>
        </div>
     </div>
 
     <div class="right">
-        <div class="iframe-wrapper">
+        <div class="iframe-wrapper-meny">
             <iframe
             src="https://kagerup.github.io/infoscreen-test/DagensLunch.html"></iframe>
         </div>
