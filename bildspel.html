@@ -1,1 +1,75 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<title>Bildspel från Dropbox</title>
+<style>
+    body {
+        margin: 0;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
 
+    #slideshow {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+    }
+
+    #slideshow img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+
+    #slideshow img.active {
+        opacity: 1;
+    }
+</style>
+</head>
+<body>
+
+<div id="slideshow"></div>
+
+<script>
+    // 🔽 LÄGG IN DINA DROPBOX RAW-LÄNKAR HÄR 🔽
+    const images = [
+	"https://www.dropbox.com/scl/fi/9k6qw9qps0zgu07xaj44n/Hero.jpg?rlkey=ryblkyo12z6sin8qapvns7k3h&raw=",
+  "https://www.dropbox.com/s/4k4fs7pmal7w9ndi78bcz/vecka-12-samlat-02.jpg?e=1&raw1",
+	"https://www.dropbox.com/scl/fi/4k4fs7pmal7w9ndi78bcz/vecka-12-samlat-02.jpg?raw=1",
+  "https://www.dropbox.com/s/zzzz/bild3.jpg?raw=1"
+    ];
+
+    let index = 0;
+
+    const slideshow = document.getElementById("slideshow");
+
+    // Skapa <img>-element för varje bild
+    images.forEach((src, i) => {
+        const img = document.createElement("img");
+        img.src = src;
+        if (i === 0) img.classList.add("active");
+        slideshow.appendChild(img);
+    });
+
+    const slides = document.querySelectorAll("#slideshow img");
+
+    // Byt bild var 5:e sekund
+    setInterval(() => {
+        slides[index].classList.remove("active");
+        index = (index + 1) % slides.length;
+        slides[index].classList.add("active");
+    }, 5000);
+</script>
+
+</body>
+</html>
