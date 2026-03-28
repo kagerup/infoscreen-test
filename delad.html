@@ -18,14 +18,13 @@
         height: 530px;
         margin: 0 auto;
         display: grid;
-        grid-template-columns: 50% 50%;
+        grid-template-columns: 57% 43%;
         background: #ffffff;
     }
 
-    /* Stora vänstra rutan (tar två rader) */
     .left {
     grid-row: ;
-    background-color: #98c1d9;
+    background-color: #ffffff;
     padding: 0;
     margin: 0;
     overflow: hidden;
@@ -33,15 +32,47 @@
     text-align: left;       /* tvinga allt till vänster */
     object-fit: contain;    
 }
-    .iframe-wrapper-allergi {
+
+.iframe-wrapper-allergi {
     width: 100%;
     height: 100%;
     overflow: hidden;
     position: relative;
-        
+}
+
+.iframe-wrapper-allergi iframe {
+    width: 1181px;           /* originalbredd – vi MÄTER den åt dig om du vill */
+    height: 1080px;          /* originalhöjd – mät eller låt mig göra det */
+    transform: scale(0.49);  /* anpassa efter behov */
+    transform-origin: top left;
+    border: none;
+    display: block;
+}
+
+    .iframe-wrapper-meny {
+    width: 100%;
+    height: 100%;
+    overflow: none;
+    position: relative;
+}
+
+
+/* Scaling av själva infosidan */
+.iframe-wrapper-meny iframe {
+    width: 900px;            /* originalbredd */
+    height: 1350px;          /* originalhöjd */
+    transform: scale(0.37);  /* perfekt anpassning */
+    transform-origin: top left;
+    border: none;
+    display: block;
+    margin: 0;
+    padding: 0;
+    
+}
+
     /* Övre högra rutan */
     .right {
-        background-color: #e5989b; /* varm rosa */
+        background-color: #ffffff; /* varm rosa */
         padding: 0px;
         box-sizing: border-box;
         object-fit: contain;
@@ -76,3 +107,4 @@
 
 </body>
 </html>
+
