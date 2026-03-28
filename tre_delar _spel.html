@@ -1,1 +1,108 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<title>Layout 1181x1080</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: #eaeaea;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Hela arbetsytan */
+    #canvas {
+        width: 1181px;
+        height: 1080px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 70% 30%;
+        grid-template-rows: 540px 540px;
+        background: #ffffff;
+    }
+
+    /* Stora vänstra rutan (tar två rader) */
+    .left-big {
+    grid-row: 1 / 3;
+    background-color: #98c1d9;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    text-align: left;       /* tvinga allt till vänster */
+}
+
+.iframe-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    text-align: left;       /* viktigt */
+    object-fit:contain;
+}
+
+.iframe-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    margin: 0;              /* ta bort auto-centrering */
+    padding: 0;             /* ta bort auto-centrering */
+    object-fit:contain;
+}
+
+    /* Övre högra rutan */
+    .right-top {
+        background-color: #e5989b; /* varm rosa */
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    /* Nedre högra rutan */
+    .right-bottom {
+        background-color: #b5e48c; /* ljus grön */
+        padding: 20px;
+        box-sizing: border-box;
+    }
+</style>
+
+</head>
+<body>
+
+<div id="canvas">
+    
+    <!-- LEFT AREA WITH IFRAME WRAPPER -->
+    <div class="left-big">
+        <div class="iframe-wrapper">
+            <iframe
+            src="https://kagerup.github.io/infoscreen-test/bildspel.html"></iframe>
+        </div>
+    </div>
+
+    <div class="right-top">
+        <div class="iframe-wrapper">
+            <iframe
+            src="https://kagerup.github.io/infoscreen-test/svinn.html"></iframe>
+        </div>
+    </div>
+
+    <div class="right-bottom">
+        <h3></h3>
+        <p><!-- placeholder för framtida behov --></p>
+        <p>Igår drog vi bort 8 kg från svinnet som ben från kycklingklubborna.</p>
+        <p>Dessutom fann vi 1 tallrik, 2 knivar, 2 gafflar och 1 glas i matavfallet.</p>
+        <br><br>
+        <p>Igår var ni 364 elever som åt lunch på skolan.</p>
+        <p>Varje köttbulle väger 14 gram.</p>
+        <P>Hur många köttbbullar kastade varje elev i genomsnitt?</P>
+
+    
+    </div>
+
+</div>
+
+</body>
+</html>
 
