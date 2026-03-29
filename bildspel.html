@@ -2,35 +2,24 @@
 <html lang="sv">
 <head>
 <meta charset="UTF-8">
-<title>Bildspel från Dropbox</title>
+<title>Bildspel från GitHub-mapp</title>
 <style>
     body {
         margin: 0;
-        background: #000;
+        background: black;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
     }
-
-    #slideshow {
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        position: relative;
-    }
-
     #slideshow img {
+        position: absolute;
         width: 100%;
         height: 100%;
         object-fit: contain;
-        position: absolute;
-        top: 0;
-        left: 0;
         opacity: 0;
         transition: opacity 1s ease-in-out;
     }
-
     #slideshow img.active {
         opacity: 1;
     }
@@ -41,35 +30,36 @@
 <div id="slideshow"></div>
 
 <script>
-    // 🔽 LÄGG IN DINA DROPBOX RAW-LÄNKAR HÄR 🔽
-    const images = [
-	"https://www.dropbox.com/scl/fi/9k6qw9qps0zgu07xaj44n/Hero.jpg?rlkey=ryblkyo12z6sin8qapvns7k3h&raw=1",
-        "https://www.dropbox.com/s/4k4fs7pmal7w9ndi78bcz/vecka_12_samlat_02.jpg?e=1&raw1",
-	"https://www.dropbox.com/scl/fi/4k4fs7pmal7w9ndi78bcz/vecka_12_samlat_02.jpg?raw=1",
-        "https://www.dropbox.com/scl/fi/4k4fs7pmal7w9ndi78bcz/vecka_12_samlat_02.jpg?rlkey=5v6ry36hdhjwy9fy4u1acqrfo&st=h8wcvumf&raw=1"
-    ];
+const githubUser = "kagerup";         // ändra till ditt användarnamn
+const repoName   = "infoscreen-test"; // ändra till ditt repo
+const folderPath = "bildspel";          // ändra till din mapp
 
-    let index = 0;
+fetch(`https://api.github.com/repos/${githubUser}/${repoName}/contents/${folderPath}`)
+    .then(res => res.json())
+    .then(files => {
+        const images = files
+            .filter(f => f.name.match(/\.(jpg|jpeg|png|gif)$/i))
+            .map(f => f.download_url);
 
-    const slideshow = document.getElementById("slideshow");
+        const slideshow = document.getElementById("slideshow");
+        images.forEach((src, i) => {
+            const img = document.createElement("img");
+            img.src = src;
+            if (i === 0) img.classList.add("active");
+            slideshow.appendChild(img);
+        });
 
-    // Skapa <img>-element för varje bild
-    images.forEach((src, i) => {
-        const img = document.createElement("img");
-        img.src = src;
-        if (i === 0) img.classList.add("active");
-        slideshow.appendChild(img);
+        let index = 0;
+        const slides = document.querySelectorAll("#slideshow img");
+
+        setInterval(() => {
+            slides[index].classList.remove("active");
+            index = (index + 1) % slides.length;
+            slides[index].classList.add("active");
+        }, 5000);
     });
-
-    const slides = document.querySelectorAll("#slideshow img");
-
-    // Byt bild var 5:e sekund
-    setInterval(() => {
-        slides[index].classList.remove("active");
-        index = (index + 1) % slides.length;
-        slides[index].classList.add("active");
-    }, 5000);
 </script>
 
 </body>
 </html>
+``
