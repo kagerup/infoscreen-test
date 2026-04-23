@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sv">
 <head>
@@ -9,7 +8,7 @@
   <style>
     :root {
       --fg: #111;
-      --bg: #fff;
+      --bg: #ffffff;
       --maxw: 820px;
     }
 
@@ -19,12 +18,13 @@
       color: var(--fg);
       font-family: Arial, Helvetica, sans-serif;
       line-height: 1.6;
+      overflow-y: auto;
     }
 
     .container {
       max-width: var(--maxw);
       margin: 0 auto;
-      padding: 32px 24px;
+      padding: 32px 24px 120px; /* extra botten så text inte klipps */
     }
 
     h1 {
@@ -64,10 +64,6 @@
       text-decoration: none;
     }
 
-    a:hover {
-      text-decoration: underline;
-    }
-
     .note {
       font-size: 12px;
       color: #333;
@@ -76,6 +72,7 @@
 </head>
 
 <body>
+
   <div class="container">
 
     <h1>Klimatsmarta måltider</h1>
@@ -94,64 +91,88 @@
       <div class="rating">🌍🌍 Helt okej</div>
       <p>
         Mellan <strong>0,7–1,4 kg CO₂e per portion</strong>.<br>
-        Maträtter som innehåller griskött och ris, samt rätter med mycket ost.
+        Maträtter med griskött, ris eller mycket ost.
       </p>
 
       <div class="rating">🌍 Minst klimatsmart</div>
       <p>
         Över <strong>1,4 kg CO₂e per portion</strong>.<br>
-        Främst rätter som till stor del innehåller nötkött.
+        Främst rätter där nötkött dominerar.
       </p>
     </div>
 
     <h2>Matkalkylator</h2>
     <p>
-      Maträtternas klimatpåverkan är uträknad med
-      <strong>Världsnaturfonden (WWF)</strong>s matkalkylator och inkluderar
-      tillbehör som grönsaker, men inte dryck.
+      Klimatpåverkan är uträknad med
+      <strong>Världsnaturfonden (WWF)</strong>s matkalkylator och
+      inkluderar tillbehör, men inte dryck.
     </p>
 
     <p>
-      Nyfiken på hur kalkylatorn fungerar? Testa själv på:
-      <br>
+      Läs mer på:<br>
       <a href="https://www.matkalkylatorn.se/" target="_blank">
         www.matkalkylatorn.se
       </a>
     </p>
 
     <p class="note">
-      Matkalkylatorn visar endast måltidens klimatpåverkan.
-      Andra faktorer, som biologisk mångfald, rikt odlingslandskap
-      och naturbetande djur, är också viktiga.
+      Klimatpåverkan är en faktor bland flera – biologisk mångfald,
+      odlingslandskap och naturbetande djur är också viktiga.
     </p>
 
-    <h2>Vad är CO₂e (koldioxidekvivalenter)?</h2>
+    <h2>Vad är CO₂e?</h2>
     <p>
-      Klimatutsläpp och växthusgaser är gaser som påverkar vårt klimat.
-      Exempel är koldioxid, metan och lustgas. De finns naturligt, men
-      mänskliga aktiviteter har kraftigt ökat utsläppen.
+      CO₂e (koldioxidekvivalenter) används för att jämföra olika
+      växthusgaser efter deras klimatpåverkan.
     </p>
 
     <div class="box">
-      <p><strong>Koldioxid</strong> – från förbränning av fossila bränslen och nedbrytning av torvmarker</p>
-      <p><strong>Metan</strong> – från djurens matsmältning</p>
-      <p><strong>Lustgas</strong> – släpps ut från marken vid odling</p>
+      <p><strong>Koldioxid</strong> – fossila bränslen & torvmarker</p>
+      <p><strong>Metan</strong> – djurens matsmältning</p>
+      <p><strong>Lustgas</strong> – vid odling i jordbruket</p>
     </div>
 
     <p>
-      När man uttrycker utsläpp i <strong>CO₂e</strong> anger man hur mycket
-      koldioxid som ger samma klimatpåverkan.
-      Metan bidrar cirka <strong>21 gånger mer</strong> till växthuseffekten än koldioxid.
+      Metan bidrar cirka <strong>21 gånger mer</strong> till
+      växthuseffekten än koldioxid.
     </p>
 
     <p class="note">
-      Informationen är hämtad från WWF:
-      <br>
+      Källa: WWF<br>
       <a href="https://www.wwf.se/mat-och-jordbruk/matkalkylator/" target="_blank">
-        wwf.se/mat-och-jordbruk/matkalkylator
+        wwf.se
       </a>
     </p>
 
   </div>
+
+  <!-- ✅ AUTOMATISK SCROLL FÖR INFOSCREEN -->
+  <script>
+    let speed = 0.25;     // scrollhastighet
+    let direction = 1;   // 1 = ner, -1 = upp
+
+    function autoScroll() {
+      window.scrollBy(0, speed * direction);
+
+      const bottomReached =
+        window.innerHeight + window.scrollY >= document.body.offsetHeight - 2;
+
+      const topReached = window.scrollY <= 0;
+
+      if (bottomReached) {
+        direction = -1;
+        setTimeout(() => {}, 2000);
+      }
+
+      if (topReached) {
+        direction = 1;
+        setTimeout(() => {}, 2000);
+      }
+    }
+
+    setInterval(autoScroll, 20);
+  </script>
+
 </body>
 </html>
+``
