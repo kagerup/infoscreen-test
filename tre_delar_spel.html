@@ -1,178 +1,99 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Klimatsmarta måltider</title>
+<meta charset="UTF-8">
+<title>Layout 1181x1080</title>
 
-  <style>
-    :root {
-      --fg: #111;
-      --bg: #ffffff;
-      --maxw: 820px;
-    }
-
+<style>
     body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--fg);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
-      overflow-y: auto;
+        margin: 0;
+        padding: 0;
+        background: #eaeaea;
+        font-family: Arial, sans-serif;
     }
 
-    .container {
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 32px 24px 120px; /* extra botten så text inte klipps */
+    /* Hela arbetsytan */
+    #canvas {
+        width: 1181px;
+        height: 1080px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 70% 30%;
+        grid-template-rows: 540px 540px;
+        background: #ffffff;
     }
 
-    h1 {
-      text-align: center;
-      font-size: 22px;
-      margin-bottom: 12px;
-      font-weight: 800;
+    /* Stora vänstra rutan (tar två rader) */
+    .left-big {
+    grid-row: 1 / 3;
+    background-color: #98c1d9;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    text-align: left;       /* tvinga allt till vänster */
+}
+
+.iframe-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    text-align: left;       /* viktigt */
+    object-fit:contain;
+}
+
+.iframe-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    margin: 0;              /* ta bort auto-centrering */
+    padding: 0;             /* ta bort auto-centrering */
+    object-fit:contain;
+}
+
+    /* Övre högra rutan */
+    .right-top {
+        background-color: #e5989b; /* varm rosa */
+        padding: 20px;
+        box-sizing: border-box;
     }
 
-    h2 {
-      font-size: 18px;
-      margin-top: 32px;
-      margin-bottom: 10px;
+    /* Nedre högra rutan */
+    .right-bottom {
+        background-color: #b5e48c; /* ljus grön */
+        padding: 20px;
+        box-sizing: border-box;
     }
+</style>
 
-    p {
-      font-size: 12px;
-      margin: 8px 0;
-    }
-
-    .rating {
-      font-size: 14px;
-      font-weight: 700;
-      margin: 18px 0 6px;
-    }
-
-    .box {
-      border: 2px solid #eee;
-      border-radius: 10px;
-      padding: 20px;
-      margin: 24px 0;
-      background: #fafafa;
-    }
-
-    a {
-      color: #0066cc;
-      text-decoration: none;
-    }
-
-    .note {
-      font-size: 12px;
-      color: #333;
-    }
-  </style>
 </head>
-
 <body>
 
-  <div class="container">
-
-    <h1>Klimatsmarta måltider</h1>
-
-    <p>
-      Dessa symboler på matsedeln visar hur klimatsmart dagens maträtt är.
-    </p>
-
-    <div class="box">
-      <div class="rating">🌍🌍🌍 Mest klimatsmart</div>
-      <p>
-        Max <strong>0,7 kg CO₂e per portion</strong>.<br>
-        De flesta vegetariska rätter och fiskrätter hamnar här.
-      </p>
-
-      <div class="rating">🌍🌍 Helt okej</div>
-      <p>
-        Mellan <strong>0,7–1,4 kg CO₂e per portion</strong>.<br>
-        Maträtter med griskött, ris eller mycket ost.
-      </p>
-
-      <div class="rating">🌍 Minst klimatsmart</div>
-      <p>
-        Över <strong>1,4 kg CO₂e per portion</strong>.<br>
-        Främst rätter där nötkött dominerar.
-      </p>
+<div id="canvas">
+    
+    <!-- LEFT AREA WITH IFRAME WRAPPER -->
+    <div class="left-big">
+        <div class="iframe-wrapper">
+            <iframe
+            src="https://kagerup.github.io/infoscreen-test/bildspel.html"></iframe>
+        </div>
     </div>
 
-    <h2>Matkalkylator</h2>
-    <p>
-      Klimatpåverkan är uträknad med
-      <strong>Världsnaturfonden (WWF)</strong>s matkalkylator och
-      inkluderar tillbehör, men inte dryck.
-    </p>
-
-    <p>
-      Läs mer på:<br>
-      <a href="https://www.matkalkylatorn.se/" target="_blank">
-        www.matkalkylatorn.se
-      </a>
-    </p>
-
-    <p class="note">
-      Klimatpåverkan är en faktor bland flera – biologisk mångfald,
-      odlingslandskap och naturbetande djur är också viktiga.
-    </p>
-
-    <h2>Vad är CO₂e?</h2>
-    <p>
-      CO₂e (koldioxidekvivalenter) används för att jämföra olika
-      växthusgaser efter deras klimatpåverkan.
-    </p>
-
-    <div class="box">
-      <p><strong>Koldioxid</strong> – fossila bränslen & torvmarker</p>
-      <p><strong>Metan</strong> – djurens matsmältning</p>
-      <p><strong>Lustgas</strong> – vid odling i jordbruket</p>
+    <div class="right-top">
+        <div class="iframe-wrapper">
+            <iframe
+            src="https://kagerup.github.io/infoscreen-test/svinn.html"></iframe>
+        </div>
     </div>
 
-    <p>
-      Metan bidrar cirka <strong>21 gånger mer</strong> till
-      växthuseffekten än koldioxid.
-    </p>
-
-    <p class="note">
-      Källa: WWF<br>
-      <a href="https://www.wwf.se/mat-och-jordbruk/matkalkylator/" target="_blank">
-        wwf.se
-      </a>
-    </p>
-
-  </div>
-
-  <!-- ✅ AUTOMATISK SCROLL FÖR INFOSCREEN -->
-  <script>
-    let speed = 0.25;     // scrollhastighet
-    let direction = 1;   // 1 = ner, -1 = upp
-
-    function autoScroll() {
-      window.scrollBy(0, speed * direction);
-
-      const bottomReached =
-        window.innerHeight + window.scrollY >= document.body.offsetHeight - 2;
-
-      const topReached = window.scrollY <= 0;
-
-      if (bottomReached) {
-        direction = -1;
-        setTimeout(() => {}, 2000);
-      }
-
-      if (topReached) {
-        direction = 1;
-        setTimeout(() => {}, 2000);
-      }
-    }
-
-    setInterval(autoScroll, 20);
-  </script>
+    <div class="right-bottom">
+        <div class="iframe-wrapper">
+            <iframe
+            src="https://kagerup.github.io/infoscreen-test/Globar.html"></iframe>
+        </div>
+    </div>
 
 </body>
 </html>
-``
